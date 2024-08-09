@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  tg-bot:
+    build: .
+    volumes:
+      - ./app:/app
+    command: python main.py
+    networks:
+      - tg-bot-network
+    environment:
+      - DEBUG=${DEBUG}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - API_URL_VPN=${API_URL_VPN}
+      - SECRET_VPN_STRING=${SECRET_VPN_STRING}
+
+networks:
+  tg-bot-network:
