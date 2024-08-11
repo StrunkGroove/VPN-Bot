@@ -1,11 +1,22 @@
 version: '3'
 
 services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./db/mongodb:/data/db
+    networks:
+      - tg-bot-network
+
   tg-bot:
     build: .
     volumes:
       - ./app:/app
     command: python main.py
+    depends_on:
+      - mongodb
     networks:
       - tg-bot-network
     environment:
@@ -13,6 +24,9 @@ services:
       - BOT_TOKEN=${BOT_TOKEN}
       - API_URL_VPN=${API_URL_VPN}
       - SECRET_VPN_STRING=${SECRET_VPN_STRING}
+      - VIP_USERS=${VIP_USERS}
+      - PRICE=${PRICE}
+      - MONGODB_URL=mongodb://mongodb:27017/
 
 networks:
   tg-bot-network:
