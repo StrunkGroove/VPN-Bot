@@ -22,7 +22,7 @@ menu_commands = {
         )
     },
     "full_access_key": {
-        "key": "get_full_access_key",
+        "key": "getvpn",
         "value": "Получить ключ для VPN без ограничений",
         "on_bad_message": (
             "🚀 Чтобы получить полный доступ к VPN, свяжитесь со мной: {user_link}.\n\n"
@@ -42,7 +42,7 @@ menu_commands = {
         )
     },
     "demo_access_key": {
-        "key": "get_demo_access_key",
+        "key": "getdemovpn",
         "callback": "callback_demo_access_key",
         "value": "Получить демо-ключ для подключения к VPN",
         "message": (
@@ -57,7 +57,7 @@ menu_commands = {
         )
     },
     "stastitics": {
-        "key": "get_stastitics",
+        "key": "stastitics",
         "value": "Получить статистику использования",
         "message": "Вы израсходовали {transferred_data}/{limit} (Gb)",
         "message_without_limit": "Вы израсходовали {transferred_data} (Gb)",
@@ -70,8 +70,8 @@ menu_commands = {
         )
     },
     "get_tg_id": {
-        "key": "get_tg_id",
-        "value": "Узнать свой уникальный Tg id",
+        "key": "getid",
+        "value": "Узнать id",
         "message": (
             "Пользователь: {username} имеет id: <code>{id}</code>"
         )
