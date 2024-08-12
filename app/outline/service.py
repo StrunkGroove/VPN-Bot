@@ -1,23 +1,13 @@
 from os import getenv
 from typing import Union
 from urllib.parse import urljoin
-from os import getenv
 
-import aiohttp
-from aiohttp import TCPConnector
+from aiohttp import ClientSession, TCPConnector
+from .exceptions import OutlineServerException
 
 
 def bytes_to_gb(integer: int) -> float:
     return round(integer / (1024 ** 3), 3)
-
-
-class TestLimit:
-    name = "5 Gb"
-    value = 1_073_741_824 * 5
-
-
-class OutlineServerException(Exception):
-    pass
 
 
 class OutlineManager:
@@ -30,9 +20,7 @@ class OutlineManager:
     async def get_data(
         self, url: str, method = "get", **kwargs
     ) -> Union[dict, str]:
-        async with aiohttp.ClientSession(
-            connector=TCPConnector(ssl=False)
-        ) as session:
+        async with ClientSession(connector=TCPConnector(ssl=False)) as session:
             async with session.request(
                 method, url, **kwargs
             ) as response:
@@ -64,7 +52,7 @@ class OutlineManager:
             - limit (dict): Ожидает словарь вида {"bytes": <bytes>}.
         """
         payload = {**kwargs}
-        url = urljoin(self.api_url, f"/{self.secret_string}/access-keys/{key_id}",)
+        url = urljoin(self.api_url, f"/{self.secret_string}/access-keys/{key_id}")
         result = await self.get_data(url, "put", timeout=timeout, json=payload)
         return result
 

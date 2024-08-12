@@ -1,0 +1,2 @@
+class OutlineServerException(Exception):
+    pass
