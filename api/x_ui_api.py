@@ -66,7 +66,7 @@ class XUiApi:
                         {
                             "id": str(tg_id),
                             "flow": "xtls-rprx-vision",
-                            "email": email,
+                            "email": str(email),
                             "limitIp": 0,
                             "totalGB": 0,
                             "expiryTime": 0,
