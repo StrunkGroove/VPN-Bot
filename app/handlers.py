@@ -61,9 +61,12 @@ async def command_vpn_handler(message: Message) -> None:
 
     vpn_link = get_vpn_link(message.from_user.id)
     if not vpn_link:
-        X_UI_API.add_client_to_inbound(
-            tg_id=message.from_user.id, email=message.from_user.username
+        email = (
+            message.from_user.username
+            if message.from_user.username
+            else message.from_user.id
         )
+        X_UI_API.add_client_to_inbound(tg_id=message.from_user.id, email=email)
         vpn_link = get_vpn_link(message.from_user.id)
 
     message_text = (

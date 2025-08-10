@@ -71,7 +71,7 @@ class XUiApi:
                             "totalGB": 0,
                             "expiryTime": 0,
                             "enable": True,
-                            "tgId": tg_id,
+                            "tgId": str(tg_id),
                             "subId": "",
                             "reset": 0,
                         }
@@ -81,10 +81,20 @@ class XUiApi:
         }
         return self.request(url, "POST", headers=headers, data=payload)
 
+    def del_client(self, client_id: str) -> Union[dict, NoReturn]:
+        url = urljoin(
+            self.base_url,
+            f"{self.secret_path}/panel/api/inbounds/{self.main_inbound_id}/delClient/{client_id}",
+        )
+        payload = {}
+        headers = {"Accept": "application/json"}
+        result = self.request(url, "POST", headers=headers, data=payload)
+        return result
+
 
 X_UI_API = XUiApi()
 
 
 if __name__ == "__main__":
     X_UI_API.login()
-    X_UI_API.get_inboud()
+    X_UI_API.del_client()

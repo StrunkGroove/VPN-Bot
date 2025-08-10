@@ -1,4 +1,5 @@
 import logging
+import traceback
 from functools import wraps
 
 logger = logging.getLogger("vpn_bot")
@@ -10,7 +11,9 @@ def catch_errors(func):
         try:
             return await func(*args, **kwargs)
         except Exception as e:
-            logger.error(f"Ошибка в обработчике {func.__name__}: {e}", exc_info=True)
+            logger.error(
+                f"Ошибка в обработчике {func.__name__}: {e}\n{traceback.format_exc()}"
+            )
             if args:
                 message = args[0]
                 try:
