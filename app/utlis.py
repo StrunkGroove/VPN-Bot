@@ -21,7 +21,7 @@ def build_vpn_link(domain: str, inbound: dict, client: dict) -> str:
         f'&security={inbound["streamSettings"]["security"]}'
         f'&pbk={settings["publicKey"]}'
         f'&fp={settings["fingerprint"]}'
-        f'&sni={s['serverNames'][0]}'
+        f'&sni={s["serverNames"][0]}'
         f'&sid={s["shortIds"][0]}'
         f'&spx={settings["spiderX"]}'
         f'&pqv={settings["mldsa65Verify"]}'
